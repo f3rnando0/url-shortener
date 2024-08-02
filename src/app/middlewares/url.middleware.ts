@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { z } from "zod";
 import { findShorten } from "../services/url.service";
+import { addMetric } from "../services/metric.service";
 
 const shortenSchema = z.object({
   id: z
@@ -15,7 +16,7 @@ export const catchShortner = async (
   response: Response,
   next: NextFunction
 ) => {
-  if (request.method === "GET") {
+  if (request.method === "GET" && !request.url.includes("/metrics")) {
     const urlId = request.url.split("/")[1];
     const isPrefixCorrect = shortenSchema.safeParse({ id: urlId });
 
@@ -29,6 +30,14 @@ export const catchShortner = async (
     const shorten = await findShorten(isPrefixCorrect.data.id);
 
     if (shorten) {
+      await addMetric({
+        shortenId: isPrefixCorrect.data.id,
+        ip: request.ip ? request.ip : null,
+        userAgent: request.headers["user-agent"]
+          ? request.headers["user-agent"]
+          : null,
+      });
+
       return response.redirect(shorten.originalUrl);
     } else {
       return response.status(404).json({

@@ -33,7 +33,7 @@ const generatePrefix = () => {
 
   const prefixLength = Math.floor(Math.random() * (10 - 5 + 1)) + 5;
 
-  let prefix = '';
+  let prefix = "";
 
   for (let i = 0; i < prefixLength; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
