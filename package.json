@@ -10,16 +10,22 @@
   },
   "scripts": {
     "start": "bun ./src/index.ts",
-    "dev": "bun --watch ./src/index.ts"
+    "dev": "bun --watch ./src/index.ts",
+    "test": "mocha --reporter spec"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
     "@prisma/client": "^5.17.0",
+    "@types/chai": "^4.3.17",
+    "@types/mocha": "^10.0.7",
+    "chai": "^5.1.1",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "express": "^4.19.2",
+    "i": "^0.3.7",
+    "mocha": "^10.7.0",
     "zod": "^3.23.8"
   }
 }
