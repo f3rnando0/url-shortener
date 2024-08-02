@@ -1,5 +1,7 @@
 # url_shortner
 
+### inspiration: https://github.com/backend-br/desafios/blob/master/url-shortener/PROBLEM.md
+
 To install dependencies:
 
 ```bash
